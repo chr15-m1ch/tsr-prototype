@@ -27,3 +27,4 @@ help:
 - classify_subset_real_time.py classifies traffic sign in real time
 - classify_subset_video.py classifies traffic signs from videos (not yet completed)
 
+- added a new line here 

@@ -1,0 +1,5 @@
+{
+    "python.pythonPath":"C:\\Users\\SURJU\\anaconda3\\envs\\tf\\python.exe",
+	"python.terminal.activateEnvironment": true,
+	"terminal.integrated.shell.windows": "C:\\Windows\\System32\\cmd.exe",
+}
