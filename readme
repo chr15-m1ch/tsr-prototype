@@ -1,0 +1,29 @@
+this is a prototype with a GUI (based on murzatsan)
+
+training:
+- done with subset of GTSRB (around 9000 images)
+- 8 classes can be detected
+- stop, no entry, give way, speed limit 80 and 60, children crossing, keep left and keep right
+
+features:
+- recognition in real time
+- recognition from videos
+- recognition from images
+
+gui:
+- allows real time recoginition
+- allows choose mp4 file for upload 
+- allows choose image for upload
+
+
+help:
+- run the tsr_app.py for the application
+
+- directory subsetGermanDataset contains our dataset for training
+- subsetGermanDatasetLabels.csv is the excell file that contains id and name of classes
+- training_subset.py trains the model
+- germanSubsetModel.p is our result model after training
+
+- classify_subset_real_time.py classifies traffic sign in real time
+- classify_subset_video.py classifies traffic signs from videos (not yet completed)
+
