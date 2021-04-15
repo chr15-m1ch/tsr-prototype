@@ -75,7 +75,7 @@ while(cap.isOpened()):
     img = preprocessing(img)
     # cv2.imshow("Processed Image", img)
     img = img.reshape(1, 32, 32, 1)
-    cv2.putText(display, "CLASS: " , (20, 35), font, 0.75, (0, 255, 0), 2, cv2.LINE_AA)
+    cv2.putText(display, "SIGN CLASS: " , (20, 35), font, 0.75, (0, 255, 0), 2, cv2.LINE_AA)
     cv2.putText(display, "PROBABILITY: ", (20, 75), font, 0.75, (0, 255, 0), 2, cv2.LINE_AA)
     # predict image
     predictions = model.predict(img)
@@ -84,7 +84,7 @@ while(cap.isOpened()):
 
     if probabilityValue > threshold:
         #print(getClassName(classIndex))
-        cv2.putText(display,str(classIndex)+" "+str(getClassName(classIndex)), (120, 35), font, 0.75, (0, 255, 0), 2, cv2.LINE_AA)
+        cv2.putText(display, str(getClassName(classIndex)), (180, 35), font, 0.75, (0, 255, 0), 2, cv2.LINE_AA)
 
         p = probabilityValue*100
         pColor = (0,0,255) #make prob appear red by default
