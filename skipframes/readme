@@ -1,0 +1,3 @@
+- this directory contains new versions of the program
+- these versions are not processing each frames and doign the detection
+- they skip frame (nth frame is being processed)

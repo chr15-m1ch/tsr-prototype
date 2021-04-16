@@ -9,17 +9,18 @@ root = Tk()
 # function to trigger realtime btn
 def realTime():
     # print("real time")
-    runpy.run_path("classify_subset_real_time.py")
+    # runpy.run_path("classify_subset_real_time.py")
+    runpy.run_path("skipframes/realtime.py")
     
 # function to trigger upload video btn
 def uploadVideo():
     # print("upload video")
-    runpy.run_path("classify_subset_video.py")
+    # runpy.run_path("classify_subset_video.py")
+    runpy.run_path("skipframes/video.py")
 
 def uploadImage():
     # print("upload image")
     runpy.run_path("classify_subset_image.py")
-
 
 
 def center(frm): 

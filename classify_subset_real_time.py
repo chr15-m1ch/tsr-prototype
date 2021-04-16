@@ -71,7 +71,8 @@ while True:
 
     if probabilityValue > threshold:
         #print(getClassName(classIndex))
-        cv2.putText(imgOriginal,str(classIndex)+" "+str(getClassName(classIndex)), (120, 35), font, 0.75, (0, 255, 0), 2, cv2.LINE_AA)
+        # cv2.putText(imgOriginal,str(classIndex)+" "+str(getClassName(classIndex)), (120, 35), font, 0.75, (0, 255, 0), 2, cv2.LINE_AA)
+        cv2.putText(display, str(getClassName(classIndex)), (180, 35), font, 0.75, (0, 255, 0), 2, cv2.LINE_AA)
 
         p = probabilityValue*100
         pColor = (0,0,255) #make prob appear red by default
