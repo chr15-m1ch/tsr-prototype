@@ -1,6 +1,5 @@
 # penkor travay lor saaa!!
 # ena sa pu fr lerla merge
-# kav ajoute la voix ladn
 
 # imports
 import numpy as np
@@ -13,8 +12,8 @@ from skimage import io
 from imutils import paths
 from tkinter import *
 from PIL import ImageTk, Image
-from tkinter import filedialog
-import pyttsx3
+from tkinter import filedialog #for gui
+import pyttsx3 #for voice assistant
 
 # voice assistant parameters
 engine = pyttsx3.init() # object creation
@@ -122,9 +121,9 @@ def voiceNotification(classNo):
 
 # read the video of the file chosen
 # cap = cv2.VideoCapture(filename) # use when choosing file
-# cap = cv2.VideoCapture('videos/sample001.mp4')
+cap = cv2.VideoCapture('videos/sample003.mp4')
 
-cap = cv2.VideoCapture(0) #from webcam
+# cap = cv2.VideoCapture(0) #from webcam
 
 className = '' 
 frameCount = 0
@@ -177,8 +176,9 @@ while(cap.isOpened()):
             # print(int(classIndex))
             # print(dummyIndex)
             # print(dummyIndex != int(classIndex))
-            # print(dummyIndex != -1)
 
+
+            #trigger voice assitant when confidence > 90 and index from last frame is not same as current frame
             if (dummyIndex != int(classIndex) and p > 90):
                 print("here")
                 dummyIndex = classIndex
