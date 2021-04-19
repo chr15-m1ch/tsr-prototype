@@ -4,17 +4,17 @@
 
 from tkinter import *
 from PIL import ImageTk,Image
-import runpy #run script
+# import runpy #run script
 from tkinter import filedialog
 from PIL import ImageTk, Image
 import numpy as np
 import cv2
-from tensorflow import keras
+# from tensorflow import keras
 from tensorflow.keras.models import load_model
-from skimage import transform
-from skimage import exposure
-from skimage import io
-from imutils import paths
+# from skimage import transform
+# from skimage import exposure
+# from skimage import io
+# from imutils import paths
 import pyttsx3 
 
 # declare my global variables
@@ -40,7 +40,7 @@ font = cv2.FONT_HERSHEY_SIMPLEX
 # load the model
 print("[INFO] loading model...")
 model = load_model('germanSubsetModel.p')
-print("[INFO] ...model loaded")
+print("[INFO] ....model loaded")
 
 
 
@@ -127,6 +127,7 @@ def frameClassification(s):
         frameCount = frameCount + 1
 
     cap.release()
+    cv2.destroyAllWindows()
 
 def voiceNotification(classNo): #give voice notif from id
     if   classNo == 0: 
@@ -196,7 +197,7 @@ def uploadImage(): #function to trigger upload image btn
     root.filename = filedialog.askopenfilename(
         initialdir="/TSR-UI/images", 
         title="Select an image", 
-        filetypes=(("png files", "*.png"), ("jpeg files", ".jpg")))
+        filetypes=(("jpeg files", ".jpg"), ("png files", "*.png")))
 
     # print("file location: " + root.filename)
     # get the location
@@ -217,8 +218,8 @@ def uploadImage(): #function to trigger upload image btn
     img = preprocessing(img)
     # cv2.imshow("Processed Image", img)
     img = img.reshape(1, 32, 32, 1)
-    cv2.putText(display, "CLASS: " , (20, 35), font, 0.75, (0, 255, 0), 2, cv2.LINE_AA)
-    cv2.putText(display, "PROBABILITY: ", (20, 75), font, 0.75, (0, 255, 0), 2, cv2.LINE_AA)
+    cv2.putText(display, "SIGN  CLASS:  " , (20, 35), font, 0.75, (0, 255, 0), 2, cv2.LINE_AA)
+    cv2.putText(display, "PROBABILITY:  ", (20, 75), font, 0.75, (0, 255, 0), 2, cv2.LINE_AA)
     # predict image
     predictions = model.predict(img)
     classIndex = model.predict_classes(img)
