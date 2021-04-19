@@ -16,6 +16,8 @@ from tensorflow.keras.models import load_model
 # from skimage import io
 # from imutils import paths
 import pyttsx3 
+from time import time
+
 
 # declare my global variables
 root = Tk()
@@ -78,6 +80,10 @@ def frameClassification(s):
         # pre process the nth frame (but start with the first frame)
         if (frameCount == 0) or (frameCount%10==0) :
             # cv2.imshow('frame',frame)
+
+            # time
+            start_time = time()
+
             # process the frame
             img = np.asarray(imgOrignal)
             img = cv2.resize(img, (32, 32))
@@ -109,14 +115,20 @@ def frameClassification(s):
                 
                 cv2.putText(display, str(round(probabilityValue*100,2) )+"%", (180, 75), font, 0.75, pColor, 2, cv2.LINE_AA)
 
-                # trigger voice assitant when confidence > 90 and index from last frame is not same as current frame
-                if (dummyIndex != int(classIndex) and p > 90):
-                    print("here")
-                    dummyIndex = classIndex
-                    voiceNotification(classIndex)
-                # voice assistant
+                
 
             cv2.imshow("Video classification", display)
+
+            # trigger voice assitant when confidence > 90 and index from last frame is not same as current frame
+            if (dummyIndex != int(classIndex) and p > 90):
+                print("here")
+                dummyIndex = classIndex
+                voiceNotification(classIndex)
+            # voice assistant
+
+            # time
+            end_time = time()
+            print("time taken to classify frame: ", str(end_time - start_time))
         
             # if cv2.waitKey(1) and 0xFF == ord('q'):
             #     break
@@ -212,7 +224,10 @@ def uploadImage(): #function to trigger upload image btn
     # resize the display window
     display = cv2.resize(imgOrignal, (800, 600))
 
-    # PROCESS IMAGE
+    # start time of the processing
+    start_time = time()
+
+    # process image
     img = np.asarray(imgOrignal)
     img = cv2.resize(img, (32, 32))
     img = preprocessing(img)
@@ -238,6 +253,11 @@ def uploadImage(): #function to trigger upload image btn
 
     cv2.putText(display, str(round(probabilityValue*100,2) )+"%", (180, 75), font, 0.75, pColor, 2, cv2.LINE_AA)
     cv2.imshow("Image classification", display)
+
+    # end time of the processing
+    end_time = time()
+    time_taken = end_time - start_time
+    print("time taken for the classification: " + str(time_taken))
 
 def center(frm): #center a frame
     # size of the app
@@ -274,7 +294,6 @@ def main():
     btn4.grid(row=0, column=3, padx=5)
     # center the frame
     center(root)
-
 
 if __name__ == '__main__':
     main()
