@@ -9,6 +9,7 @@ features:
 - recognition in real time
 - recognition from videos
 - recognition from images
+- voice notification when images are recognised
 
 gui:
 - allows real time recoginition
@@ -18,6 +19,7 @@ gui:
 
 help:
 - run the tsr_app.py for the application
+- run tsr-app-gui-video-image-voice.py for a better version(loads model once, voice notif)
 
 - directory subsetGermanDataset contains our dataset for training
 - subsetGermanDatasetLabels.csv is the excell file that contains id and name of classes
@@ -25,6 +27,5 @@ help:
 - germanSubsetModel.p is our result model after training
 
 - classify_subset_real_time.py classifies traffic sign in real time
-- classify_subset_video.py classifies traffic signs from videos (not yet completed)
-
-- added a new line here 
+- classify_subset_video.py classifies traffic signs from videos
+- classify_subset_image.py classifies images
