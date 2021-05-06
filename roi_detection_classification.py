@@ -170,7 +170,8 @@ def Classification():
             mask = cv2.erode(mask, kernel)
 
             # perform contours detection
-            contours, _ = cv2.findContours(mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+            # contours, _ = cv2.findContours(mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+            contours, hier = cv2.findContours(mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
             
             for cnt in contours:
                 area = cv2.contourArea(cnt)
@@ -182,9 +183,32 @@ def Classification():
                 if (area > 7000 and area <12000):
                     # cv2.putText(frame, label, (startX, startY - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.45, color, 2)
 		            # cv2.rectangle(frame, (startX, startY), (endX, endY), color, 2)
-                    cv2.putText(display, "traffic sign", (x, y -10 ), font, 0.75, (255, 0, 255), 1, cv2.LINE_AA)
+                    cv2.putText(display, "traffic sign", (x, y - 10 ), font, 0.75, (255, 0, 255), 1, cv2.LINE_AA)
                     cv2.rectangle(display, (x, y), (x+w, y+h), (255, 0, 255), 2)
+                    # crop the rectangle
                     crop_img = display[y:y+h, x:x+w]
+
+            # to prevent bbox inside bbox (refering to same object)
+            # Iterate contours and hierarchy:
+            # for c, h in zip(contours, hier[0]):
+            #     area = cv2.contourArea(c)
+
+            #     # Check if contour has one parent and one at least on child:
+            #     if (h[3] >= 0) and (h[2] >= 0):
+            #         # Get the parent from the hierarchy
+            #         hp = hier[0][h[3]]
+
+            #         # Check if the parent has a parent:
+            #         if hp[3] >= 0:
+            #             # Get bounding rectange
+            #             x, y, w, h = cv2.boundingRect(c)
+                    
+            #         if (area > 7000 and area <12000):
+
+            #             # Draw red rectange for testing
+            #             cv2.rectangle(display, (x, y), (x+w, y+h), (0, 0, 255), thickness=1)
+
+
 
             # 
             # try:
@@ -237,11 +261,13 @@ def Classification():
 
                     cv2.putText(display, str(round(probabilityValue*100,2) )+"%", (180, 75), font, 0.75, pColor, 2, cv2.LINE_AA)
 
-                    # #trigger voice assitant when confidence > 90 and index from last frame is not same as current frame
-                    # if (dummyIndex != int(classIndex) and p > 90):
-                    #     print("here")
-                    #     dummyIndex = classIndex
-                    #     voiceNotification(classIndex)
+                    #trigger voice assitant when confidence > 90 and index from last frame is not same as current frame
+                    if (dummyIndex != int(classIndex) and p > 90):
+                        # print("here")
+                        dummyIndex = classIndex
+                        engine.say(className)
+                        engine.runAndWait()
+                        engine.stop()
             
             except NameError:
                 # print("no roi detected")

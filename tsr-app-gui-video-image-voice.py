@@ -26,7 +26,7 @@ root = Tk()
 engine = pyttsx3.init() # object creation
 # RATE
 rate = engine.getProperty('rate')   # getting details of current speaking rate
-engine.setProperty('rate', 200)     # setting up new voice rate
+engine.setProperty('rate', 225)     # setting up new voice rate
 # VOLUME
 volume = engine.getProperty('volume')   #getting to know current volume level (min=0 and max=1)
 engine.setProperty('volume', 1.0)    # setting up volume level  between 0 and 1
@@ -88,7 +88,7 @@ def frameClassification(s):
             img = np.asarray(imgOrignal)
             img = cv2.resize(img, (32, 32))
             img = preprocessing(img)
-            # cv2.imshow("Processed Image", img)
+            cv2.imshow("Processed Image", img)
             img = img.reshape(1, 32, 32, 1)
 
             # predict frame
@@ -121,9 +121,11 @@ def frameClassification(s):
 
             # trigger voice assitant when confidence > 90 and index from last frame is not same as current frame
             if (dummyIndex != int(classIndex) and p > 90):
-                print("here")
+                # print("here")
                 dummyIndex = classIndex
-                voiceNotification(classIndex)
+                # engine.say(className)
+                # engine.runAndWait()
+                # engine.stop()
             # voice assistant
 
             # time
